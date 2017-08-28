@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="adminheard"> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="style-2">
+<div class="container">
+<div class="row" style="padding-top: 100px; clear: both;"></div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-2">
+					<!-- Start Sign In Form -->
+					<form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
+						<h2>Forgot Password</h2>
+						<div class="form-group">
+							<div class="alert alert-success" role="alert">Your email has been sent.</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="sr-only">Email</label>
+							<input type="email" class="form-control" id="email" placeholder="Email" autocomplete="off"/>
+						</div>
+						<div class="form-group">
+							<p><a href="/signinShow">Sign In</a> or <a href="/signupShow">Sign Up</a></p>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Send Email" class="btn btn-primary"/>
+						</div>
+					</form>
+					<!-- END Sign In Form -->
+				</div>
+			</div>
+			<div class="row" style="padding-top: 200px; clear: both;"></div>
+	</div>
+</body>
+</html>
