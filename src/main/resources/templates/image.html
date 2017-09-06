@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/mqttws31.js"></script>
+<body>
+	<form action="/image" method="post" enctype="multipart/form-data" >
+		<input type="text" placeholder="最大大小（可不填）" name="sizeT" id="sizeT"/><br/>
+		<input type="text" placeholder="宽度（可不填）" name="width" id="width"/><br/>
+		<input type="text" placeholder="长度（可不填）" name="height" id="height"/><br/>
+		<input type="file" name="imageT" id="imageT"/>
+		<input type="submit" value="上传"/>
+	</form>
+	<input type="button" id="btn-start" value="连接"/>
+	<input type="text" id="txt-value"/>
+	<input type="button" id="btn-send" value="发送"/>
+</body>
+<script type="text/javascript">
+	var host="127.0.0.1";
+	var port=61614;
+	var clientID="myWeb";
+	var destination="test";
+	window.onload=function(){
+		document.getElementById("btn-start").onclick=function(){
+			window.client=new Messaging.Client(host,Number(port),clientID);
+			console.info(client);
+			client.onMessageArrived=function(e){
+				alert(e.payloadString);
+			}; 
+			client.onConnectionLost=function(e){
+				alert("lost");
+			};
+			client.connect({
+				onSuccess:function(){
+					client.subscribe(destination);
+					alert("ok");
+				},
+				onFailure:function(){
+					alert("connect fail");
+				}
+			});
+		}
+		document.getElementById("btn-send").onclick=function(){
+			var txt=document.getElementById("txt-value").value;
+			if(txt!=""){
+				var message=new Messaging.Message(txt);
+				message.destinationName=destination;
+				client.send(message);
+			}
+		};
+	}
+
+</script>
+<!-- <script type="text/javascript">
+	var i=60;
+	document.getElementById("sizeT").value="55";
+		var qq=setInterval(
+		function(){
+			document.getElementById("sizeT").value=i-;
+			if(i==55){
+				clearInterval(qq);
+			}
+		}	,1000	
+	);
+</script> -->
+</html>
